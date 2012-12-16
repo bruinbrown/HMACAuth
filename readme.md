@@ -42,7 +42,7 @@ How do I implement it in my Web API?
 1. Add the required using statements
 2. To all protected methods add the HMACAuth attribute along with an IEnumerable of APIUsers. This can be either an in memory List or it can be an Entity Framework DbSet
 3. Consider named parameters for other setup. The options are as follows
-    * SecurityProvider -> Which hashing algorithm will be used on the server side. Must match client side. Defaults to SHAMD5.
+    * SecurityProvider -> Which hashing algorithm will be used on the server side. Must match client side. Defaults to HMACMD5.
     * MaxQueryTimeoutLength -> The maximum time limit a query can exist before it becomes no longer authorized. Defaults to 15 minutes.
     * EndUserDateFormat -> The CultureInfo of the DateTime parse. Defaults to en-US.
     * Encoding -> Encoding format of the Key and Data. Defaults to ASCII encoding.
