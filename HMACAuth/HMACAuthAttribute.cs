@@ -17,27 +17,31 @@ namespace HMACAuth
     [AttributeUsage(AttributeTargets.Class|AttributeTargets.Method,AllowMultiple=false,Inherited=true)]
     public class HMACAuthAttribute : AuthorizeAttribute, IDisposable
     {
-        Encoding Encoding { get; set; }
+        #region Named Parameters
         SecurityProvider SecurityProvider { get; set; }
-        IEnumerable<APIUser> users;
-        IEnumerable<APIUser> Users { get { return users; } }
-        //Context db;
         Role MinimumRole { get; set; }
-        string responseContent = "";
-        TimeSpan maxDelay = new TimeSpan(0, 15, 0);
         TimeSpan MaxQuerytimeoutLength { get; set; }
         CultureInfo EndUserDateFormat { get; set; }
         Encoding KeyFormatEncoding { get; set; }
         IEnumerable<string> ParametersToIgnore { get; set; }
+        #endregion
+
+        #region Position Parameters
+        IEnumerable<APIUser> users;
+        IEnumerable<APIUser> Users { get { return users; } }
+        #endregion
+
+        string responseContent = "";
 
         public HMACAuthAttribute(IEnumerable<APIUser> users)
         {
             this.users = users;
             this.MinimumRole = Role.User;
             this.EndUserDateFormat = new CultureInfo("en-US");
-            this.KeyFormatEncoding = new UTF8Encoding();
+            this.KeyFormatEncoding = new ASCIIEncoding();
             this.ParametersToIgnore = new List<string>();
             this.SecurityProvider = SecurityProvider.HMACSHA1;
+            this.MaxQuerytimeoutLength = new TimeSpan(0, 15, 0);
         }
 
         public override void OnAuthorization(System.Web.Http.Controllers.HttpActionContext actionContext)
