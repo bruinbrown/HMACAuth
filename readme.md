@@ -1,4 +1,4 @@
-HMAC AUthorization for ASP.NET Web API projects
+HMAC Authorization for ASP.NET Web API projects
 ===============================================
 
 What is it?
