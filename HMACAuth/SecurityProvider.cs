@@ -13,7 +13,6 @@ namespace HMACAuth
         HAMCSHA384,
         HMACSHA512,
         HMACMD5,
-        HMACRIPEMD160,
-
+        HMACRIPEMD160
     }
 }
