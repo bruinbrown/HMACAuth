@@ -10,7 +10,6 @@ namespace HMACAuth
     {
         public static APIUser GetAPIUser(this IEnumerable<APIUser> users, string publicKey)
         {
-            APIUser user = null;
             var possUsers = users.Where(x => x.PublicKey == publicKey);
             if (possUsers.Count() > 0)
             {
