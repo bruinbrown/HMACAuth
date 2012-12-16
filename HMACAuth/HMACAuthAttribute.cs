@@ -137,8 +137,8 @@ namespace HMACAuth
 
         private byte[] CalculateHash(NameValueCollection QueryString, AuthorizationComponents components, APIUser user)
         {
-            var privateKeyBytes = Encoding.GetBytes(user.PrivateKey);
-            var messageBytes = Encoding.GetBytes(components.DataHash);
+            var privateKeyBytes = KeyFormatEncoding.GetBytes(user.PrivateKey);
+            var messageBytes = KeyFormatEncoding.GetBytes(components.DataHash);
             KeyedHashAlgorithm provider = HashProviderFactory.GetInstance(this.SecurityProvider);
             provider.Key = privateKeyBytes;
             string fullString = "";
@@ -152,7 +152,7 @@ namespace HMACAuth
                 }
             }
             fullString += components.TimeRequestExecuted;
-            return provider.ComputeHash(Encoding.GetBytes(fullString));
+            return provider.ComputeHash(KeyFormatEncoding.GetBytes(fullString));
         }
 
         public void Dispose()
